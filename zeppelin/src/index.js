@@ -5,7 +5,6 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store';
 
-
 import {CALL_API} from 'redux-api-middleware';
 
 const getProjectsList = () => ({
