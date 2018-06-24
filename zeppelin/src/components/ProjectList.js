@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Card, Header, Segment, Button} from 'semantic-ui-react';
 
+import ProjectItem from './ProjectItem';
+
 const ProjectList = ({projects, isLoading}) => (
     <div>
         <Segment clearing vertical basic>
@@ -10,7 +12,7 @@ const ProjectList = ({projects, isLoading}) => (
             </Header>
         </Segment>
         <Card.Group itemsPerRow={3}>
-            {projects.map(item => <span key={item.id} id={item.id}>{item.title} </span>)}
+            {projects.map(project => <ProjectItem project={project}/>)}
         </Card.Group>
     </div>
 );
