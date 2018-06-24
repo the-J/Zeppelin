@@ -2,7 +2,6 @@ import React from 'react';
 import {Header, Comment, Form, Button, Icon} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {getFilteredComments , getSelectedPoint} from '../selectors';
-
 const SidebarComments = ({comments, point, deselectPoint}) => {
     return (
         <div>
