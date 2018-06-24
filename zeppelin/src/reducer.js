@@ -36,8 +36,31 @@ const isAppLoading = (state = false, action) => {
     }
 };
 
+const shops = (state = [], action) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
+const similars = (state = {}, action) => {
+    switch (action.type) {
+        case "FIND_PROJECT_SIMILARS":
+            return {};
+        case "RECEIVE_SHOP_SIMILAR":
+            return {
+                ...state,
+                ...action.payload
+            };
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     isAppLoading,
+    shops,
+    similars,
     projects,
     selectedPoints
 });
