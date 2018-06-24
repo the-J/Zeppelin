@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import ProjectList from './ProjectList';
 
@@ -9,9 +10,11 @@ export default class App extends Component {
 
         return (
             <Provider {...this.props}>
-                <div>
-                    <ProjectList />
-                </div>
+                <Router>
+                    <div>
+                        <Route exact path='/' component={ProjectList} />
+                    </div>
+                </Router>
             </Provider>
         );
     }
