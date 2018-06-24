@@ -1,9 +1,9 @@
-import React from "react";
-import { Header, Comment, Form, Button, Icon } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { getFiltredComments, getSelectedPoint } from "../selectors";
+import React from 'react';
+import {Header, Comment, Form, Button, Icon} from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import {getFilteredComments , getSelectedPoint} from '../selectors';
 
-const SidebarComments = ({ comments, point, deselectPoint }) => {
+const SidebarComments = ({comments, point, deselectPoint}) => {
     return (
         <div>
             <Header as="h3">Komentarze: </Header>
@@ -21,25 +21,26 @@ const SidebarComments = ({ comments, point, deselectPoint }) => {
                 </Button>
             )}
             <Comment.Group>
-                {comments && comments.length > 0 &&
-                comments.map(({ author, content, id } = {}) => (
-                    <Comment key={id}>
-                        <Comment.Avatar
-                            as="a"
-                            src={`http://i.pravatar.cc/35?img=${id}`}
-                        />
-                        <Comment.Content>
-                            <Comment.Author>{author}</Comment.Author>
-                            <Comment.Text>
-                                <p>{content}</p>
-                            </Comment.Text>
-                            <Comment.Actions>
-                                <Comment.Action>odpowiedz</Comment.Action>
-                            </Comment.Actions>
-                        </Comment.Content>
-                    </Comment>
-                ))}
-
+                {
+                    comments.length > 0 &&
+                    comments.map(({author, content, id} = {}) => (
+                        <Comment key={id}>
+                            <Comment.Avatar
+                                as="a"
+                                src={`http://i.pravatar.cc/35?img=${id}`}
+                            />
+                            <Comment.Content>
+                                <Comment.Author>{author}</Comment.Author>
+                                <Comment.Text>
+                                    <p>{content}</p>
+                                </Comment.Text>
+                                <Comment.Actions>
+                                    <Comment.Action>odpowiedz</Comment.Action>
+                                </Comment.Actions>
+                            </Comment.Content>
+                        </Comment>
+                    ))
+                }
                 <Form reply>
                     <Form.TextArea />
                     <Button
@@ -55,13 +56,12 @@ const SidebarComments = ({ comments, point, deselectPoint }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    deselectPoint: point => dispatch({ type: "DESELECT_POINT" })
+    deselectPoint: point => dispatch({type: 'DESELECT_POINT'})
 });
 
 const mapStateToProps = (state, ownProps) => {
-    getFiltredComments(state, ownProps);
     return {
-        comments: getFiltredComments(state, ownProps),
+        comments: getFilteredComments (state, ownProps),
         point: getSelectedPoint(state, ownProps)
     };
 };

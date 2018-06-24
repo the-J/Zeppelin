@@ -18,9 +18,8 @@ const selectedPoints = (state = null, action) => {
         case 'SELECT_POINT': {
             return action.payload;
         }
-        case 'DESELECT_POINT': {
+        case 'DESELECT_POINT':
             return null;
-        }
         default:
             return state;
     }

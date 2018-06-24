@@ -13,7 +13,7 @@ export const getProjectPoints = (state, props) => {
 
 export const getSelectedPoint = state => state.selectedPoints;
 
-export const getFiltredComments = createSelector(
+export const getFilteredComments = createSelector(
     getProject, getSelectedPoint,
 
     (project, point) => {
