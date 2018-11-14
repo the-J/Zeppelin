@@ -6,7 +6,7 @@ import ImageComments from '../components/ImageComments';
 import SidebarComments from '../components/SidebarComments';
 import ProjectSimilars from '../components/ProjectSimilars';
 
-const ProjectView = ({match}) => (
+const ProjectView = ( { match } ) => (
     <Layout
         sidebar={<SidebarComments id={match.params.projectId} />}
         content={

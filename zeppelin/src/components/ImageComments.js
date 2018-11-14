@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Image, Segment, Button, Icon, Header} from 'semantic-ui-react';
-import {getProjectPoints, getSelectedPoint, getProject} from '../selectors';
+import { connect } from 'react-redux';
+import { Button, Header, Icon, Image, Segment } from 'semantic-ui-react';
+import { getProject, getProjectPoints, getSelectedPoint } from '../selectors';
 
-const ImageComments = ({points, selectPoint, point, title}) => {
+const ImageComments = ( { points, selectPoint, point, title } ) => {
     return (
         <Segment basic vertical>
             <Header as="h1">{title}</Header>
@@ -18,12 +18,12 @@ const ImageComments = ({points, selectPoint, point, title}) => {
             >
                 <Image src="http://via.placeholder.com/175x250" size="big" />
                 {
-                    points.map(({x, y}) => (
+                    points.map(( { x, y } ) => (
                         <Button
                             key={`${x}-${y}`}
                             icon
                             circular
-                            onClick={() => selectPoint({x, y})}
+                            onClick={() => selectPoint({ x, y })}
                             color={
                                 point && `${x}-${y}` === `${point.x}-${point.y}` ? 'green' : 'red'
                             }
@@ -43,11 +43,11 @@ const ImageComments = ({points, selectPoint, point, title}) => {
     );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    selectPoint: point => dispatch({type: 'SELECT_POINT', payload: point})
+const mapDispatchToProps = ( dispatch, ownProps ) => ({
+    selectPoint: point => dispatch({ type: 'SELECT_POINT', payload: point })
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = ( state, ownProps ) => ({
     points: getProjectPoints(state, ownProps),
     point: getSelectedPoint(state, ownProps),
     title: getProject(state, ownProps).title

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Menu, Container} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Container, Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const Content = props => {
     return (

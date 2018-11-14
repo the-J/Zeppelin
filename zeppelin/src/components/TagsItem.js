@@ -1,9 +1,8 @@
 import React from 'react';
-import {Label, Icon} from 'semantic-ui-react';
-import {connect} from 'react-redux';
+import { Icon, Label } from 'semantic-ui-react';
 // import { getSelectedtags } from "../selectors";
 
-const TagsItem = ({name, isSelected, selectIngredient}) => (
+const TagsItem = ( { name, isSelected, selectIngredient } ) => (
     <Label
         color={isSelected ? 'blue' : undefined}
         // onClick={() => selectIngredient(name)}

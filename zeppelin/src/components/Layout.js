@@ -1,11 +1,9 @@
-import React from "react";
-import { Container, Grid, Segment } from "semantic-ui-react";
-import { connect } from "react-redux";
+import React from 'react';
+import { Container, Grid, Segment } from 'semantic-ui-react';
+import Menu from './Menu';
 // import withLoadingInfo from "./LoadingInfo";
 
 // import { isAppLoading } from "../selectors";
-
-import Menu from "./Menu";
 
 const Layout = props => {
     return (
@@ -13,7 +11,7 @@ const Layout = props => {
             <Menu />
             <Container>
                 <Segment basic vertical>
-                    <Grid divided stackable reversed={"mobile"}>
+                    <Grid divided stackable reversed={'mobile'}>
                         <Grid.Column width={12}>{props.content}</Grid.Column>
                         <Grid.Column width={4}>{props.sidebar}</Grid.Column>
                     </Grid>
@@ -35,4 +33,4 @@ const Layout = props => {
 //     })(Home)
 // );
 
-export default Layout
+export default Layout;

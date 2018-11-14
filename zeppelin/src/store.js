@@ -1,13 +1,13 @@
-import {createStore, applyMiddleware} from 'redux';
-import {createLogger} from 'redux-logger';
+import { applyMiddleware, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducer';
 import rootSaga from './sagas';
 
-import {apiMiddleware} from 'redux-api-middleware';
+import { apiMiddleware } from 'redux-api-middleware';
 
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [apiMiddleware, sagaMiddleware];
+const middlewares = [ apiMiddleware, sagaMiddleware ];
 
 if (process.env.NODE_ENV === 'development') {
     const logger = createLogger();
@@ -21,7 +21,7 @@ const shouldLoadDevTools =
         ? window.devToolsExtension()
         : f => f;
 
-export default function configureStore(initialState) {
+export default function configureStore( initialState ) {
     const store = createStoreWithMiddleware(
         rootReducer,
         initialState,

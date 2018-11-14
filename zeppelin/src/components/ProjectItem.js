@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {Card, Image} from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Card, Image } from 'semantic-ui-react';
 
 import TagsList from './TagsList';
 import TagsSummary from './TagsSummary';
 
-const ProjectItem = ({project}) => {
+const ProjectItem = ( { project } ) => {
     return (
         <Card>
             <Image src={`http://via.placeholder.com/260x175?text=${project.id}`} />

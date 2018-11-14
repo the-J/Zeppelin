@@ -1,8 +1,9 @@
 import React from 'react';
-import {Header, Comment, Form, Button, Icon} from 'semantic-ui-react';
-import {connect} from 'react-redux';
-import {getFilteredComments , getSelectedPoint} from '../selectors';
-const SidebarComments = ({comments, point, deselectPoint}) => {
+import { Button, Comment, Form, Header, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { getFilteredComments, getSelectedPoint } from '../selectors';
+
+const SidebarComments = ( { comments, point, deselectPoint } ) => {
     return (
         <div>
             <Header as="h3">Komentarze: </Header>
@@ -22,7 +23,7 @@ const SidebarComments = ({comments, point, deselectPoint}) => {
             <Comment.Group>
                 {
                     comments.length > 0 &&
-                    comments.map(({author, content, id} = {}) => (
+                    comments.map(( { author, content, id } = {} ) => (
                         <Comment key={id}>
                             <Comment.Avatar
                                 as="a"
@@ -54,13 +55,13 @@ const SidebarComments = ({comments, point, deselectPoint}) => {
     );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    deselectPoint: point => dispatch({type: 'DESELECT_POINT'})
+const mapDispatchToProps = ( dispatch, ownProps ) => ({
+    deselectPoint: point => dispatch({ type: 'DESELECT_POINT' })
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
     return {
-        comments: getFilteredComments (state, ownProps),
+        comments: getFilteredComments(state, ownProps),
         point: getSelectedPoint(state, ownProps)
     };
 };

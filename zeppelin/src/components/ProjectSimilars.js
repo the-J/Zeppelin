@@ -1,29 +1,31 @@
-import React from "react";
-import find from "lodash/find";
-import { Icon, Header, Table, Button } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { reduce, times } from "lodash";
-import { getProjects, getShops, getSimilars } from "../selectors";
+import React from 'react';
+import { Button, Header, Icon, Table } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { reduce, times } from 'lodash';
+import { getShops, getSimilars } from '../selectors';
 
 class ProjectSimilars extends React.Component {
     componentDidMount() {
         const { getSimilars, projecttags } = this.props;
         getSimilars(projecttags);
     }
+
     componentWillUnmount() {
         const { closeBasket } = this.props;
         closeBasket();
     }
-    getShopCount(id) {
+
+    getShopCount( id ) {
         const { count } = this.props;
         return reduce(
-            count[id],
-            (acc, value, key) => {
+            count[ id ],
+            ( acc, value, key ) => {
                 return acc + value;
             },
             0
         );
     }
+
     render() {
         const { shops, count, projecttags, getSimilars } = this.props;
         return (
@@ -52,8 +54,8 @@ class ProjectSimilars extends React.Component {
                                 <Table.Cell>
                                     <strong>{shop.name}</strong>
                                 </Table.Cell>
-                                {count[shop.id]
-                                    ? count[shop.id].map(i => (
+                                {count[ shop.id ]
+                                    ? count[ shop.id ].map(i => (
                                         <Table.Cell key={i}>
                                             <span>{i}</span>
                                         </Table.Cell>
@@ -97,7 +99,7 @@ ProjectSimilars.defaultProps = {};
 //         .tags;
 // };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = ( state, ownProps ) => ({
     // projecttags: getProjecttags(state, ownProps),
     shops: getShops(state),
     count: getSimilars(state)
@@ -105,8 +107,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     getSimilars: tags =>
-        dispatch({ type: "FIND_PROJECT_SIMILARS", payload: tags }),
-    closeBasket: tags => dispatch({ type: "CLOSE_PROJECT" })
+        dispatch({ type: 'FIND_PROJECT_SIMILARS', payload: tags }),
+    closeBasket: tags => dispatch({ type: 'CLOSE_PROJECT' })
 });
 
 export default connect(

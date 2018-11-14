@@ -9,25 +9,25 @@ const initialState = {
     shops: [
         {
             id: 1,
-            name: "App Store"
+            name: 'App Store'
         },
         {
             id: 2,
-            name: "Google Play"
+            name: 'Google Play'
         },
         {
             id: 3,
-            name: "Microsoft Store"
+            name: 'Microsoft Store'
         },
         {
             id: 4,
-            name: "SymbianOS"
+            name: 'SymbianOS'
         }
     ]
 };
 
 const store = configureStore(initialState);
-store.dispatch({type: 'APP_INIT'});
+store.dispatch({ type: 'APP_INIT' });
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,19 +1,19 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-const projects = (state = {loading: false, data: []}, action) => {
+const projects = ( state = { loading: false, data: [] }, action ) => {
     switch (action.type) {
         case 'FETCH_PROJECTS_REQUEST':
-            return {...state, loading: true};
+            return { ...state, loading: true };
         case 'FETCH_PROJECTS_FAILURE':
-            return {...state, loading: false};
+            return { ...state, loading: false };
         case 'FETCH_PROJECTS_SUCCESS':
-            return {...state, loading: false, data: action.payload};
+            return { ...state, loading: false, data: action.payload };
         default:
             return state;
     }
 };
 
-const selectedPoints = (state = null, action) => {
+const selectedPoints = ( state = null, action ) => {
     switch (action.type) {
         case 'SELECT_POINT': {
             return action.payload;
@@ -25,7 +25,7 @@ const selectedPoints = (state = null, action) => {
     }
 };
 
-const isAppLoading = (state = false, action) => {
+const isAppLoading = ( state = false, action ) => {
     switch (action.type) {
         case 'APP_INIT' :
             return true;
@@ -36,18 +36,18 @@ const isAppLoading = (state = false, action) => {
     }
 };
 
-const shops = (state = [], action) => {
+const shops = ( state = [], action ) => {
     switch (action.type) {
         default:
             return state;
     }
 };
 
-const similars = (state = {}, action) => {
+const similars = ( state = {}, action ) => {
     switch (action.type) {
-        case "FIND_PROJECT_SIMILARS":
+        case 'FIND_PROJECT_SIMILARS':
             return {};
-        case "RECEIVE_SHOP_SIMILAR":
+        case 'RECEIVE_SHOP_SIMILAR':
             return {
                 ...state,
                 ...action.payload
