@@ -1,9 +1,9 @@
-# Zeppelin
-React, Readux - WarsawJs workshop
+# Zeppelin'alike
+Project was created during WarsawJS Meetup workshop on Google Campus.
 
-
-redux logger - przechwytuje stan, daje go do console.log() i puszcza apkę dalej.
-
-apiMiddleware from 'redux-api-middleware'; --middleware for simulating data entry point.
-
-saga - crazy stuff, very likely very important.
+#### React, Redux, Redux-Saga
+Simulating external DB 
+* **json-server** using provided db.json file as DB
+* **redux-api-middleware** for simulating asynchronicity
+ 
+![zeppelin.gif](assets/zeppelin.gif)
