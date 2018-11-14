@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Card, Header, Segment } from 'semantic-ui-react';
 
 import ProjectItem from './ProjectItem';
 
-const ProjectList = ( { projects, isLoading } ) => (
-    <div>
+const ProjectList = ( { projects } ) => (
+    <Fragment>
         <Segment clearing vertical basic>
             <Header floated="left" as="h1">
                 Dostępne projekty aplikacji:
             </Header>
         </Segment>
+
         <Card.Group itemsPerRow={3}>
             {projects.map(project => <ProjectItem project={project} />)}
         </Card.Group>
-    </div>
+    </Fragment>
 );
 
 ProjectList.defaultProps = {

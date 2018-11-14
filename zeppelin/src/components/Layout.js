@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container, Grid, Segment } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
 import Menu from './Menu';
-// import withLoadingInfo from "./LoadingInfo";
 
-// import { isAppLoading } from "../selectors";
+import withLoadingInfo from "./LoadingInfo";
+import { isAppLoading } from "../selectors";
 
-const Layout = props => {
+const Home = props => {
     return (
-        <div>
+        <Fragment>
             <Menu />
+
             <Container>
                 <Segment basic vertical>
                     <Grid divided stackable reversed={'mobile'}>
@@ -17,20 +20,20 @@ const Layout = props => {
                     </Grid>
                 </Segment>
             </Container>
-        </div>
+        </Fragment>
     );
 };
 
-// const mapStateToProps = (state, ownProps) => ({
-//     isAppLoading: isAppLoading(state)
-// });
-//
-// const loadingMessage = "Za chwilę zostanie wyświetlony projekt";
-// export default connect(mapStateToProps)(
-//     withLoadingInfo({
-//         message: loadingMessage,
-//         selector: props => props.isAppLoading
-//     })(Home)
-// );
+const mapStateToProps = (state, ownProps) => ({
+    isAppLoading: isAppLoading(state)
+});
 
-export default Layout;
+const loadingMessage = "Za chwilę zostanie wyświetlony projekt";
+
+export default connect(mapStateToProps)(
+    withLoadingInfo({
+        message: loadingMessage,
+        selector: props => props.isAppLoading
+    })(Home)
+);
+
