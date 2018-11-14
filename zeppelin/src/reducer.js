@@ -58,9 +58,9 @@ const similars = ( state = {}, action ) => {
 };
 
 export default combineReducers({
+    projects,
+    selectedPoints,
     isAppLoading,
     shops,
-    similars,
-    projects,
-    selectedPoints
+    similars
 });
