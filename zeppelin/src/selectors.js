@@ -8,39 +8,31 @@ export const getProjectsOrder = state => state.projects.order;
 export const getProjectsEntities = state => state.projects.entities;
 export const getSimilars = state => state.similars;
 export const isAppLoading = state => state.isAppLoading;
+
 export const isProjectsLoading = state =>
     isAppLoading(state) || state.projects.loading;
+
 export const getProject = ( state, props ) =>
-    state.projects.data[ props.id - 1 ] || {};
-
-
-// export const getFiltredComments = (state, props) => {
-//   const point = state.selectedPoint;
-//   console.warn({ point });
-//   const project = state.projects.entities[parseInt(props.id, 10)] || {};
-//   const { comments = [] } = project;
-//   if (!point) return comments;
-//   const filterdComments = comments.filter(
-//     ({ x, y }) => `${x}-${y}` === `${point.x}-${point.y}`
-//   );
-//   return filterdComments;
-// };
+    state.projects.entities[ parseInt(props.id, 10) ];
 
 export const getFilteredComments = createSelector(
-    getProject, getSelectedPoint,
-
+    getProject,
+    getSelectedPoint,
     ( project, point ) => {
         const { comments = [] } = project;
-
         if (!point) return comments;
-
-        return comments.filter(( { x, y } ) => `${x}-${y}` === `${point.x}-${point.y}`);
+        const filterdComments = comments.filter(
+            ( { x, y } ) => `${x}-${y}` === `${point.x}-${point.y}`
+        );
+        return filterdComments;
     }
 );
+
 export const getProjectPoints = createSelector(getProject, project => {
     const { comments = [] } = project;
     const points = comments.map(( { x, y } ) => ({ x, y }));
-    return uniqBy(points, ( { x, y } ) => `${x}-${y}`);
+    const uniqPoints = uniqBy(points, ( { x, y } ) => `${x}-${y}`);
+    return uniqPoints;
 });
 
 export const getProjects = createSelector(
@@ -67,23 +59,27 @@ export const getFilteredProjects = createSelector(
     getProjects,
     getMatchtags,
     ( tags, projects, match ) => {
-        if (tags.length === 0) return projects;
-
+        if (tags.length === 0) {
+            return projects;
+        }
         return projects
-            .filter(project => match[ project.id ] > 0)
-            .sort(( a, b ) => match[ a.id ] < match[ b.id ]);
+            .filter(project => {
+                return match[ project.id ] > 0;
+            })
+            .sort(( a, b ) => {
+                return match[ a.id ] < match[ b.id ];
+            });
     }
 );
 
-export const getAllTags = createSelector(
+export const getAlltags = createSelector(
     getProjects,
     flow([ data => data.map(item => item.tags), flatten, uniq, sortBy ])
 );
 
-
 export const getNotSelectedtags = createSelector(
     getSelectedtags,
-    getAllTags,
+    getAlltags,
     ( selectedtags, alltags ) =>
         alltags.filter(item => !selectedtags.includes(item))
 );

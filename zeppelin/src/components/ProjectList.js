@@ -1,21 +1,38 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Card, Header, Segment } from 'semantic-ui-react';
+import { Button, Card, Header, Segment } from 'semantic-ui-react';
+
+import { getFilteredProjects, isProjectsLoading } from '../selectors';
 
 import ProjectItem from './ProjectItem';
+import Counter from './Counter';
 
 const ProjectList = ( { projects } ) => (
-    <Fragment>
-        <Segment clearing vertical basic>
-            <Header floated="left" as="h1">
-                Dostępne projekty aplikacji:
-            </Header>
-        </Segment>
+    <Counter>
+        {( counter, plus, minus ) => (
+            <Fragment>
+                <Segment clearing vertical basic>
+                    <Button.Group basic floated="right">
+                        <Button onClick={minus} icon="minus" />
+                        <Button>limit: {counter}</Button>
+                        <Button onClick={plus} icon="plus" />
+                    </Button.Group>
 
-        <Card.Group itemsPerRow={3}>
-            {projects.map(project => <ProjectItem project={project} />)}
-        </Card.Group>
-    </Fragment>
+                    <Header floated="left" as="h1">
+                        Dostępne projekty aplikacji:
+                    </Header>
+                </Segment>
+
+                <Card.Group itemsPerRow={3}>
+                    {
+                        projects
+                            .slice(0, counter)
+                            .map(item => <ProjectItem key={item.id} project={item} id={item.id} />)
+                    }
+                </Card.Group>
+            </Fragment>
+        )}
+    </Counter>
 );
 
 ProjectList.defaultProps = {
@@ -23,8 +40,8 @@ ProjectList.defaultProps = {
 };
 
 const mapStateToProps = ( state, ownProps ) => ({
-    projects: state.projects.data,
-    isLoading: state.isLoading
+    projects: getFilteredProjects(state),
+    isLoading: isProjectsLoading(state)
 });
 
 export default connect(mapStateToProps)(ProjectList);

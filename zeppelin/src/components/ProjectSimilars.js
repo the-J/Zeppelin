@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Header, Icon, Table } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { reduce, times } from 'lodash';
-import { getShops, getSimilars } from '../selectors';
+import { find, reduce, times } from 'lodash';
+
+import { getProjects, getShops, getSimilars } from '../selectors';
 
 class ProjectSimilars extends React.Component {
     componentDidMount() {
@@ -16,18 +17,16 @@ class ProjectSimilars extends React.Component {
     }
 
     getShopCount( id ) {
-        const { count } = this.props;
         return reduce(
-            count[ id ],
-            ( acc, value, key ) => {
-                return acc + value;
-            },
+            this.props.count[ id ],
+            ( acc, value, key ) => acc + value,
             0
         );
     }
 
     render() {
         const { shops, count, projecttags, getSimilars } = this.props;
+
         return (
             <div>
                 <Header as="h2">Liczba podobnych aplikacji: </Header>
@@ -49,25 +48,29 @@ class ProjectSimilars extends React.Component {
                     </Table.Header>
 
                     <Table.Body>
-                        {shops.map(shop => (
-                            <Table.Row key={shop.id}>
-                                <Table.Cell>
-                                    <strong>{shop.name}</strong>
-                                </Table.Cell>
-                                {count[ shop.id ]
-                                    ? count[ shop.id ].map(i => (
-                                        <Table.Cell key={i}>
-                                            <span>{i}</span>
-                                        </Table.Cell>
-                                    ))
-                                    : times(3).map(i => (
-                                        <Table.Cell key={i}>
-                                            <Icon loading name="spinner" />
-                                        </Table.Cell>
-                                    ))}
-                                <Table.Cell>{this.getShopCount(shop.id)}</Table.Cell>
-                            </Table.Row>
-                        ))}
+                        {
+                            shops.map(shop => (
+                                <Table.Row key={shop.id}>
+                                    <Table.Cell>
+                                        <strong>{shop.name}</strong>
+                                    </Table.Cell>
+                                    {
+                                        count[ shop.id ]
+                                            ? count[ shop.id ].map(i => (
+                                                <Table.Cell key={i}>
+                                                    <span>{i}</span>
+                                                </Table.Cell>
+                                            ))
+                                            : times(3).map(i => (
+                                                <Table.Cell key={i}>
+                                                    <Icon loading name="spinner" />
+                                                </Table.Cell>
+                                            ))
+                                    }
+                                    <Table.Cell>{this.getShopCount(shop.id)}</Table.Cell>
+                                </Table.Row>
+                            ))
+                        }
                     </Table.Body>
 
                     <Table.Footer fullWidth>
@@ -92,22 +95,20 @@ class ProjectSimilars extends React.Component {
 }
 
 ProjectSimilars.defaultProps = {};
-//
-// const getProjecttags = (state, ownProps) => {
-//     const projects = getProjects(state);
-//     return find(projects, project => project.id === parseInt(ownProps.id, 10))
-//         .tags;
-// };
+
+const getProjecttags = ( state, ownProps ) => {
+    const projects = getProjects(state);
+    return find(projects, project => project.id === parseInt(ownProps.id, 10)).tags;
+};
 
 const mapStateToProps = ( state, ownProps ) => ({
-    // projecttags: getProjecttags(state, ownProps),
+    projecttags: getProjecttags(state, ownProps),
     shops: getShops(state),
     count: getSimilars(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-    getSimilars: tags =>
-        dispatch({ type: 'FIND_PROJECT_SIMILARS', payload: tags }),
+    getSimilars: tags => dispatch({ type: 'FIND_PROJECT_SIMILARS', payload: tags }),
     closeBasket: tags => dispatch({ type: 'CLOSE_PROJECT' })
 });
 
