@@ -1,18 +1,15 @@
 import React from 'react';
 import { Icon, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-
 import { getSelectedtags } from '../selectors';
 
-const TagsItem = ( { name, isSelected, selectIngredient } ) => (
+const tagsItem = ( { name, isSelected, selectIngredient } ) => (
     <Label
         color={isSelected ? 'blue' : undefined}
         onClick={() => selectIngredient(name)}
         as="a"
     >
-        {
-            isSelected && <Icon name="checkmark" />
-        }
+        {isSelected && <Icon name="checkmark" />}
         #{name}
     </Label>
 );
@@ -28,4 +25,4 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TagsItem);
+)(tagsItem);

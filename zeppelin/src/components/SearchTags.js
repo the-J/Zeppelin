@@ -25,7 +25,7 @@ const mapStateToProps = ( state, ownProps ) => ({
 });
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ({
-    addTag: name => dispatch({ typ: 'ADD_TAG', payload: name })
+    addTag: name => dispatch({ type: 'ADD_TAG', payload: name })
 });
 
 export default connect(
